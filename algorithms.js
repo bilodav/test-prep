@@ -15,7 +15,7 @@ function fibonacci(n) {
   return arr;
 }
 
-// console.log(fibonacci(7));
+console.log(fibonacci(6));
 
 function factorial(n) {
   if (n === 1) return 1;
@@ -56,4 +56,16 @@ function isPowerOfTwo(num) {
   return false;
 }
 
-console.log(isPowerOfTwo(8));
+// console.log(isPowerOfTwo(8));
+
+function recursiveFibbo(num) {
+  if (num < 2) {
+    return num;
+  }
+
+  return recursiveFibbo(num - 1) + recursiveFibbo(num - 2);
+}
+
+console.log(recursiveFibbo(0)); //0
+console.log(recursiveFibbo(1)); // 1
+console.log(recursiveFibbo(6)); // 8
