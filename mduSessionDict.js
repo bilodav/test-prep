@@ -55,3 +55,33 @@ function translateToBraille(toTranslate) {
 
   return result.join("");
 }
+
+const translator = createDictionary();
+
+const revTranslator = Object.fromEntries(
+  Object.entries(translator).map(([key, value]) => [value, key]),
+);
+
+function transFromBraille(str) {
+  let chars = str.match(/.{1,6}/g);
+  let decoded = [];
+  let isCap = false;
+  for (let char of chars) {
+    if (char === space) {
+      decoded.push(" ");
+    } else if (char === cap) {
+      isCap = true;
+      continue;
+    }
+    if (isCap) {
+      let letter = revTranslator[char].toUpperCase();
+      decoded.push(letter);
+      isCap = false;
+    } else {
+      decoded.push(revTranslator[char]);
+    }
+  }
+  return decoded.join("");
+}
+
+console.log(transFromBraille(translateToBraille("My name is BiLo")));
